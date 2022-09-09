@@ -14,6 +14,7 @@
 [![license](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](https://github.com/ashleve/lightning-hydra-template#license)
 [![contributors](https://img.shields.io/github/contributors/ashleve/lightning-hydra-template.svg)](https://github.com/ashleve/lightning-hydra-template/graphs/contributors)
 
+
 <!-- <a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/-Python 3.7+-blue?style=for-the-badge&logo=python&logoColor=white"></a> -->
 
 <!-- <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/-PyTorch 1.8+-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white"></a>
@@ -21,8 +22,8 @@
 <a href="https://hydra.cc/"><img alt="Config: hydra" src="https://img.shields.io/badge/config-hydra 1.2-89b8cd?style=for-the-badge&labelColor=gray"></a>
 <a href="https://black.readthedocs.io/en/stable/"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-black.svg?style=for-the-badge&labelColor=gray"></a> -->
 
-A clean and scalable template to kickstart your deep learning project 🚀⚡🔥<br>
-Click on [<kbd>Use this template</kbd>](https://github.com/ashleve/lightning-hydra-template/generate) to initialize new repository.
+A clean and scalable template to kickstart your deep learning project 🚀⚡🔥`<br>`
+Click on [`<kbd>`Use this template`</kbd>`](https://github.com/ashleve/lightning-hydra-template/generate) to initialize new repository.
 
 _Suggestions are always welcome!_
 
@@ -47,13 +48,13 @@ _Suggestions are always welcome!_
 
 <!-- ## Table Of Contents
 
-- [📌&nbsp;&nbsp;Introduction](#introduction)
+- [📌  Introduction](#introduction)
 - [Main Technologies](#main-technologies)
 - [Main Ideas Of This Template](#main-ideas-of-this-template)
 - [Project Structure](#project-structure)
-- [🚀&nbsp;&nbsp;Quickstart](#quickstart)
-- [⚡&nbsp;&nbsp;Your Superpowers](#your-superpowers)
-- [❤️&nbsp;&nbsp;Contributions](#️contributions)
+- [🚀  Quickstart](#quickstart)
+- [⚡  Your Superpowers](#your-superpowers)
+- [❤️  Contributions](#️contributions)
 - [How It Works](#how-it-works)
 - [Main Config](#main-config)
 - [Experiment Config](#experiment-config)
@@ -166,7 +167,7 @@ conda activate myenv
 pip install -r requirements.txt
 ```
 
-Template contains example with MNIST classification.<br>
+Template contains example with MNIST classification.`<br>`
 When running `python src/train.py` you should see something like this:
 
 <div align="center">
@@ -533,7 +534,7 @@ Using this config we can instantiate the object with the following line:
 model = hydra.utils.instantiate(config.model)
 ```
 
-This allows you to easily iterate over new models! Every time you create a new one, just specify its module path and parameters in appropriate config file. <br>
+This allows you to easily iterate over new models! Every time you create a new one, just specify its module path and parameters in appropriate config file. `<br>`
 
 Switch between models and datamodules with command line arguments:
 
@@ -547,9 +548,9 @@ Example pipeline managing the instantiation logic: [src/train.py](src/train.py).
 
 ## Main Config
 
-Location: [configs/train.yaml](configs/train.yaml) <br>
-Main project config contains default training configuration.<br>
-It determines how config is composed when simply executing command `python train.py`.<br>
+Location: [configs/train.yaml](configs/train.yaml) `<br>`
+Main project config contains default training configuration.`<br>`
+It determines how config is composed when simply executing command `python train.py`.`<br>`
 
 <details>
 <summary><b>Show main project config</b></summary>
@@ -611,8 +612,8 @@ seed: null
 
 ## Experiment Config
 
-Location: [configs/experiment](configs/experiment)<br>
-Experiment configs allow you to overwrite parameters from main config.<br>
+Location: [configs/experiment](configs/experiment)`<br>`
+Experiment configs allow you to overwrite parameters from main config.`<br>`
 For example, you can use them to version control best hyperparameters for each combination of model and dataset.
 
 <details>
@@ -684,7 +685,6 @@ _Say you want to execute many runs to plot how accuracy changes in respect to ba
    ```bash
    python train.py -m logger=csv datamodule.batch_size=16,32,64,128 tags=["batch_size_exp"]
    ```
-
 2. Write a script or notebook that searches over the `logs/` folder and retrieves csv logs from runs containing given tags in config. Plot the results.
 
 <br>
@@ -726,7 +726,7 @@ You can change this structure by modifying paths in [hydra configuration](config
 
 ## Experiment Tracking
 
-PyTorch Lightning supports many popular logging frameworks: [Weights&Biases](https://www.wandb.com/), [Neptune](https://neptune.ai/), [Comet](https://www.comet.ml/), [MLFlow](https://mlflow.org), [Tensorboard](https://www.tensorflow.org/tensorboard/).
+PyTorch Lightning supports many popular logging frameworks: [Weights&amp;Biases](https://www.wandb.com/), [Neptune](https://neptune.ai/), [Comet](https://www.comet.ml/), [MLFlow](https://mlflow.org), [Tensorboard](https://www.tensorflow.org/tensorboard/).
 
 These tools help you keep track of hyperparameters and output metrics and allow you to compare and visualize results. To use one of them simply complete its configuration in [configs/logger](configs/logger) and run:
 
@@ -923,7 +923,7 @@ conda activate myenv
 <details>
 <summary><b>Use automatic code formatting</b></summary>
 
-Use pre-commit hooks to standardize code formatting of your project and save mental energy.<br>
+Use pre-commit hooks to standardize code formatting of your project and save mental energy.`<br>`
 Simply install pre-commit package with:
 
 ```bash
@@ -962,7 +962,7 @@ pre-commit run -a
 <details>
 <summary><b>Set private environment variables in .env file</b></summary>
 
-System specific variables (e.g. absolute paths to datasets) should not be under version control or it will result in conflict between different users. Your private keys also shouldn't be versioned since you don't want them to be leaked.<br>
+System specific variables (e.g. absolute paths to datasets) should not be under version control or it will result in conflict between different users. Your private keys also shouldn't be versioned since you don't want them to be leaked.`<br>`
 
 Template contains `.env.example` file, which serves as an example. Create a new file called `.env` (this name is excluded from version control in .gitignore).
 You should use it for storing environment variables like this:
@@ -1032,7 +1032,7 @@ Torchmetrics provides metrics for most use cases, like F1 score or confusion mat
 <details>
 <summary><b>Follow PyTorch Lightning style guide</b></summary>
 
-The style guide is available [here](https://pytorch-lightning.readthedocs.io/en/latest/starter/style_guide.html).<br>
+The style guide is available [here](https://pytorch-lightning.readthedocs.io/en/latest/starter/style_guide.html).`<br>`
 
 1. Be explicit in your init. Try to define all the relevant defaults so that the user doesn’t have to guess. Provide type hints. This way your module is reusable across projects!
 
@@ -1040,7 +1040,6 @@ The style guide is available [here](https://pytorch-lightning.readthedocs.io/en/
    class LitModel(LightningModule):
        def __init__(self, layer_size: int = 256, lr: float = 0.001):
    ```
-
 2. Preserve the recommended method order.
 
    ```python
@@ -1091,7 +1090,7 @@ The style guide is available [here](https://pytorch-lightning.readthedocs.io/en/
 <details>
 <summary><b>Version control your data and models with DVC</b></summary>
 
-Use [DVC](https://dvc.org) to version control big files, like your data or trained ML models.<br>
+Use [DVC](https://dvc.org) to version control big files, like your data or trained ML models.`<br>`
 To initialize the dvc repository:
 
 ```bash
@@ -1229,16 +1228,16 @@ SOFTWARE.
 
 **DELETE EVERYTHING ABOVE FOR YOUR PROJECT**
 
-______________________________________________________________________
+---
 
 <div align="center">
 
 # Your Project Name
 
-<a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
-<a href="https://pytorchlightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white"></a>
-<a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
-<a href="https://github.com/ashleve/lightning-hydra-template"><img alt="Template" src="https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray"></a><br>
+`<a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white">``</a>`
+`<a href="https://pytorchlightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white">``</a>`
+`<a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd">``</a>`
+`<a href="https://github.com/ashleve/lightning-hydra-template"><img alt="Template" src="https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray">``</a><br>`
 [![Paper](http://img.shields.io/badge/paper-arxiv.1001.2234-B31B1B.svg)](https://www.nature.com/articles/nature14539)
 [![Conference](http://img.shields.io/badge/AnyConference-year-4b44ce.svg)](https://papers.nips.cc/paper/2020)
 

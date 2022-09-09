@@ -10,7 +10,7 @@ defaults:
   - extras: default.yaml
   - hydra: default.yaml
 
-task_name: "eval"
+task_name: "predict"
 
 tags: ["dev"]
 
