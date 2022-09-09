@@ -73,6 +73,10 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
 
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
+    dictt = torch.load(cfg.ckpt_path, map_location=torch.device('cpu'))
+    model.load_state_dict(dictt['state_dict'])
+    model.eval()
+
 
     log.info("Instantiating loggers...")
     logger: List[LightningLoggerBase] = utils.instantiate_loggers(cfg.get("logger"))
@@ -93,27 +97,9 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
         utils.log_hyperparameters(object_dict)
 
     log.info("Starting testing!")
-    # trainer.test(model=model, datamodule=datamodule, ckpt_path=cfg.ckpt_path)
 
-    # for predictions use trainer.predict(...)
-    print("Getting response")
-    # response = requests.get(cfg.image)
-    # img = Image.open(BytesIO(response.content))
+
     img = Image.open(cfg.image)
-    print("Got response")
-
-    print("Creating Transform")
-    # normalize = transforms.Normalize(mean=list(model.default_cfg['mean']),
-    #                                 std=list(model.default_cfg['std']))
-
-
-
-    # transform = transforms.Compose([
-    #                     transforms.Resize(256),
-    #                     transforms.CenterCrop(224),
-    #                     transforms.ToTensor(),
-    #                     normalize,
-    #                     ])
 
 
     transform = transforms.Compose([
@@ -121,21 +107,17 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
                     transforms.ToTensor()])
 
     img = transform(img)
-
-    # img = img[-1]
-    # img = img[np.newaxis, :]
     img = img[np.newaxis, :]
 
 
-    print("Predicting and shape of image: ", img.shape)
-    # predictions = trainer.predict(model=model, dataloaders=img, ckpt_path=cfg.ckpt_path)
-    model.eval()
     with torch.no_grad():
         predic = model(img)
     label = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
     val = np.argmax(predic, axis=1).numpy() - 1
-    print("val: ", val)
-    print("This is the prediction? : ", predic.shape, np.round(predic, 2), label[int(val)])
+    # print("val: ", val)
+    # print("This is the prediction? : ", predic.shape, np.round(predic, 2), label[int(val)])
+
+    print("prediction: ", label[int(val)])
 
     metric_dict = trainer.callback_metrics
 
@@ -144,7 +126,7 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
 
 @hydra.main(version_base="1.2", config_path=root / "configs", config_name="predict.yaml")
 def main(cfg: DictConfig) -> None:
-    predict(cfg)
+    predictor(cfg)
 
 
 if __name__ == "__main__":
