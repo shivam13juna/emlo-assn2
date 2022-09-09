@@ -9,10 +9,11 @@ defaults:
   - paths: default.yaml
   - extras: default.yaml
   - hydra: default.yaml
+  - callbacks: default.yaml
 
 task_name: "predict"
 
 tags: ["dev"]
 
 # passing checkpoint path is necessary for evaluation
-ckpt_path: /home/shivam13juna/Documents/learn/tsai/emlo/s2/emlo-assn2/logs/train/runs/2022-09-09_14-22-43/checkpoints/epoch_003.ckpt
+ckpt_path: logs/train/runs/2022-09-09_13-23-14/checkpoints/epoch_003.ckpt

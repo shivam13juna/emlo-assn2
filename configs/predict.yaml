@@ -16,7 +16,6 @@ tags: ["dev"]
 
 # passing checkpoint path is necessary for evaluation
 ckpt_path: logs/train/runs/2022-09-09_13-23-14/checkpoints/epoch_003.ckpt
-timm_model: resnet18
 
 # image: https://raw.githubusercontent.com/pytorch/hub/master/images/dog.jpg
 image: tmp/dog.jpg
