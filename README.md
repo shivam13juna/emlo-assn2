@@ -36,7 +36,8 @@ docker run --shm-size 25G --mount type=bind,source=`pwd`,target=/src/ session2 p
 
 ## For COG inference
 
-1. cog.yaml is configured to pick appropriate files
+1. in `src/predict.py` appropriate timm model needs to be specified (with which cifar model is trained), and path in which checkpoints are saved have to be specified. Corresponding state-dict are loaded into models, which are used in inferencing.
+2. Output is the prediction class
 
 ```
 cog predict -i image=@tmp/dog.jpg
