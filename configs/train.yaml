@@ -29,8 +29,8 @@ defaults:
 
 # task name, determines output directory path
 task_name: "train"
-accelerator: gpu
-devices: 1
+# accelerator: gpu
+# devices: 1
 
 
 # tags to help you identify your experiments
