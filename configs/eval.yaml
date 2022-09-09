@@ -2,8 +2,8 @@
 
 defaults:
   - _self_
-  - datamodule: mnist.yaml # choose datamodule with `test_dataloader()` for evaluation
-  - model: mnist.yaml
+  - datamodule: cifar.yaml # choose datamodule with `test_dataloader()` for evaluation
+  - model: cifar.yaml
   - logger: null
   - trainer: default.yaml
   - paths: default.yaml
@@ -15,4 +15,4 @@ task_name: "predict"
 tags: ["dev"]
 
 # passing checkpoint path is necessary for evaluation
-ckpt_path: ???
+ckpt_path: /home/shivam13juna/Documents/learn/tsai/emlo/s2/emlo-assn2/logs/train/runs/2022-09-09_14-22-43/checkpoints/epoch_003.ckpt
