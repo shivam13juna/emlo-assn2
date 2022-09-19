@@ -32,7 +32,7 @@ docker run --mount type=bind,source=`pwd`,target=/src/ session2 python3 src/pred
 docker run --shm-size 25G --mount type=bind,source=`pwd`,target=/src/ session2 python3 src/eval.py
 ```
 
---shm-size for increasing shared memory size for containers, was running OOM earlier. 
+--shm-size for increasing shared memory size for containers, was running OOM earlier.
 
 ## For COG inference
 
