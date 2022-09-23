@@ -30,7 +30,9 @@ class MNISTLitModule(LightningModule):
 
         # this line allows to access init params with 'self.hparams' attribute
         # also ensures init params will be stored in ckpt
-        self.save_hyperparameters(logger=False, ignore=["net"])
+        self.save_hyperparameters(logger=True, ignore=["net"])
+
+        
 
         self.net = net
 
@@ -91,6 +93,8 @@ class MNISTLitModule(LightningModule):
         self.val_acc(preds, targets)
         self.log("val/loss", self.val_loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log("val/acc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
+        self.log("hp_metric",  self.val_loss)
+        
 
         return {"loss": loss, "preds": preds, "targets": targets}
 
@@ -100,6 +104,7 @@ class MNISTLitModule(LightningModule):
         # log `val_acc_best` as a value through `.compute()` method, instead of as a metric object
         # otherwise metric would be reset by lightning after each epoch
         self.log("val/acc_best", self.val_acc_best.compute(), prog_bar=True)
+        
 
     def test_step(self, batch: Any, batch_idx: int):
         loss, preds, targets = self.step(batch)

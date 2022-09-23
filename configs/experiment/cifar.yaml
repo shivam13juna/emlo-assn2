@@ -5,7 +5,10 @@ defaults:
   - override /datamodule: cifar.yaml
   - override /model: cifar.yaml
   - override /callbacks: default.yaml
-  - override /trainer: cpu.yaml
+  - override /trainer: gpu.yaml
+  - override /logger: tensorboard.yaml
+  # - override hydra/sweeper: optuna
+
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
@@ -15,8 +18,8 @@ tags: ["cifar", "timm"]
 seed: 12345
 
 trainer:
-  min_epochs: 10
-  max_epochs: 50
+  min_epochs: 1
+  max_epochs: 10
   gradient_clip_val: 0.5
 
 

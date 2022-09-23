@@ -77,7 +77,9 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
     logger: List[LightningLoggerBase] = utils.instantiate_loggers(cfg.get("logger"))
 
     log.info(f"Instantiating trainer <{cfg.trainer._target_}>")
-    trainer: Trainer = hydra.utils.instantiate(cfg.trainer, callbacks=callbacks, logger=logger)
+    trainer: Trainer = hydra.utils.instantiate(
+        cfg.trainer, callbacks=callbacks, logger=logger
+    )
 
     object_dict = {
         "cfg": cfg,
@@ -127,6 +129,8 @@ def main(cfg: DictConfig) -> Optional[float]:
     )
 
     # return optimized metric
+
+    print("I'm returning the metric value boogie: ", metric_value)
     return metric_value
 
 

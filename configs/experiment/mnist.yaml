@@ -8,6 +8,8 @@ defaults:
   - override /model: mnist.yaml
   - override /callbacks: default.yaml
   - override /trainer: default.yaml
+  - override /logger: tensorboard.yaml
+  # - override hydra/sweeper: optuna
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
@@ -30,7 +32,7 @@ model:
     lin3_size: 64
 
 datamodule:
-  batch_size: 5000
+  batch_size: 10000
 
 logger:
   wandb:

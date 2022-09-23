@@ -169,7 +169,7 @@ def log_hyperparameters(object_dict: dict) -> None:
     hparams["seed"] = cfg.get("seed")
 
     # send hparams to all loggers
-    trainer.logger.log_hyperparams(hparams)
+    trainer.logger.log_hyperparams(hparams, {"hp_metric": 0})
 
 
 def get_metric_value(metric_dict: dict, metric_name: str) -> float:
