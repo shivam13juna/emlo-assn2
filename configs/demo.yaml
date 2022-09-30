@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - datamodule: mnist.yaml
+  - model: mnist.yaml # very important
+  - callbacks: default.yaml
+  - logger: null
+  - trainer: default.yaml
+  - paths: default.yaml
+  - extras: default.yaml
+  - hydra: default.yaml
+  - experiment: example
+
+task_name: "demo"
+
+# checkpoint is necessary for demo
+ckpt_path: logs/train/runs/2022-09-27_09-54-04/checkpoints/epoch_002.ckpt

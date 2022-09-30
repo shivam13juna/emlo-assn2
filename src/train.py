@@ -114,6 +114,25 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
     # merge train and test metrics
     metric_dict = {**train_metrics, **test_metrics}
 
+    # def recognize_digit(image):
+    #     if image is None:
+    #         return None
+    #     image = transforms(image).unsqueeze(0)
+    #     logits = model(image)
+    #     preds = F.softmax(logits, dim=1).squeeze(0).tolist()
+    #     return {str(i): preds[i] for i in range(10)}
+
+    # im = gr.Image(shape=(28, 28), image_mode="L", invert_colors=True, source="canvas")
+
+    # demo = gr.Interface(
+    #     fn=recognize_digit,
+    #     inputs=[im],
+    #     outputs=[gr.Label(num_top_classes=10)],
+    #     live=True,
+    # )
+
+    # demo.launch()
+
     return metric_dict, object_dict
 
 
@@ -130,7 +149,6 @@ def main(cfg: DictConfig) -> Optional[float]:
 
     # return optimized metric
 
-    print("I'm returning the metric value boogie: ", metric_value)
     return metric_value
 
 

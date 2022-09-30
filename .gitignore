@@ -127,6 +127,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+tmp/predict_test.ipynb
+
 ### VisualStudioCode
 .vscode/*
 !.vscode/settings.json

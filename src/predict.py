@@ -1,5 +1,14 @@
+import pyrootutils
+
+root = pyrootutils.setup_root(
+    search_from=__file__,
+    indicator=[".git", "pyproject.toml"],
+    pythonpath=True,
+    dotenv=True,
+)
+
 from typing import Any
-from cog import BasePredictor, Input, Path
+# from cog import BasePredictor, Input, Path
 import pyrootutils
 import json
 import torch
@@ -30,7 +39,7 @@ root = pyrootutils.setup_root(
     dotenv=True,
 )
 
-class Predictor(BasePredictor):
+class Predictor():
     def setup(self):
         """Load the model into memory to make running multiple predictions efficient"""
         # self.model = timm.create_model('efficientnet_b3a', pretrained=True)
@@ -47,16 +56,15 @@ class Predictor(BasePredictor):
         self.model.eval()
 
     # Define the arguments and types the model takes as input
-    def predict(self, image: Path = Input(description="Image to classify")) -> Any:
+    def predict(self, image = input) -> Any:
         """Run a single prediction on the model"""
 
         # Preprocess the image
         img = Image.open(image)
 
-        transform = transforms.Compose([
-                        transforms.Resize(32),
-                        transforms.ToTensor()])
-
+        transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,)),
+                transforms.Resize(32)])
+                
         img = transform(img)
         img = img[np.newaxis, :]
 

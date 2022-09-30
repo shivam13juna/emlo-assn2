@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 import requests
-
+import sys
 
 
 root = pyrootutils.setup_root(
@@ -48,6 +48,10 @@ from omegaconf import DictConfig
 from pytorch_lightning import LightningDataModule, LightningModule, Trainer
 from pytorch_lightning.loggers import LightningLoggerBase
 
+import torchvision.transforms as T
+import torch.nn.functional as F
+
+
 from src import utils
 
 log = utils.get_pylogger(__name__)
@@ -73,6 +77,8 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
 
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
+
+    
     dictt = torch.load(cfg.ckpt_path, map_location=torch.device('cpu'))
     model.load_state_dict(dictt['state_dict'])
     model.eval()
@@ -102,22 +108,23 @@ def predictor(cfg: DictConfig) -> Tuple[dict, dict]:
     img = Image.open(cfg.image)
 
 
-    transform = transforms.Compose([
-                    transforms.Resize(32),
-                    transforms.ToTensor()])
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,)),
+                    transforms.Resize(32)])
 
     img = transform(img)
     img = img[np.newaxis, :]
 
 
-    with torch.no_grad():
-        predic = model(img)
+    model.eval()
+    predic = model(img)
     label = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
-    val = np.argmax(predic, axis=1).numpy() - 1
-    # print("val: ", val)
-    # print("This is the prediction? : ", predic.shape, np.round(predic, 2), label[int(val)])
 
-    print("prediction: ", label[int(val)])
+    val = F.softmax(predic.detach(), dim=1).numpy()[0]
+    sorted_values = np.argsort(val)[::-1]
+    for i in sorted_values[:3]:
+        print(label[i], round(val[i] * 100, 2))
+
+    print("Predicted class: ", label[np.argmax(val)])
 
     metric_dict = trainer.callback_metrics
 
