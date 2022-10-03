@@ -19,6 +19,7 @@ docker image build -t torch_script .
 
 ## Link to Github REPO
 
+https://github.com/shivam13juna/emlo-assn2.git
 
 
 
