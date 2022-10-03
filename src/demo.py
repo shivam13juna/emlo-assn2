@@ -1,73 +1,23 @@
-import pyrootutils
-
-root = pyrootutils.setup_root(
-    search_from=__file__,
-    indicator=[".git", "pyproject.toml"],
-    pythonpath=True,
-    dotenv=True,
-)
-
-from typing import List, Tuple
-
-import torch
-import hydra
 import gradio as gr
-from omegaconf import DictConfig
-from pytorch_lightning import LightningModule
-import torchvision.transforms as T
-import torch.nn.functional as F
+import torch
+import requests
 
-from src import utils
+from PIL import Image
+from torchvision import transforms
 
-log = utils.get_pylogger(__name__)
+model = torch.hub.load('pytorch/vision:v0.6.0', 'resnet18', pretrained=True).eval()
 
-def demo(cfg: DictConfig) -> Tuple[dict, dict]:
-    """Demo function.
-    Args:
-        cfg (DictConfig): Configuration composed by Hydra.
+# Download human-readable labels for ImageNet.
+response = requests.get("https://git.io/JJkYN")
+labels = response.text.split("\n")
 
-    Returns:
-        Tuple[dict, dict]: Dict with metrics and dict with all instantiated objects.
-    """
+def predict(inp):
+    inp = transforms.ToTensor()(inp).unsqueeze(0)
+    
+    with torch.no_grad():
+        prediction = torch.nn.functional.softmax(model(inp)[0], dim=0)
+        confidences = {labels[i]: float(prediction[i]) for i in range(1000)}    
 
-    assert cfg.ckpt_path
+    return confidences
 
-    log.info("Running Demo")
-
-    log.info(f"Instantiating model <{cfg.model._target_}>")
-    model: LightningModule = hydra.utils.instantiate(cfg.model)
-
-    ckpt = torch.load(cfg.ckpt_path)
-
-    model.load_state_dict(ckpt["state_dict"])
-    model.eval()
-
-    log.info(f"Loaded Model: {model}")
-
-    transforms = T.Compose([T.ToTensor(), T.Normalize((0.1307,), (0.3081,))])
-
-    def recognize_digit(image):
-        if image is None:
-            return None
-        image = transforms(image).unsqueeze(0)
-        logits = model(image)
-        preds = F.softmax(logits, dim=1).squeeze(0).tolist()
-        return {str(i): preds[i] for i in range(10)}
-
-    im = gr.Image(shape=(28, 28), image_mode="L", invert_colors=True, source="canvas")
-
-    demo = gr.Interface(
-        fn=recognize_digit,
-        inputs=[im],
-        outputs=[gr.Label(num_top_classes=10)],
-        live=True,
-    )
-
-    demo.launch()
-
-@hydra.main(version_base="1.2", config_path=root / "configs", config_name="demo.yaml")
-def main(cfg: DictConfig) -> None:
-    demo(cfg)
-
-if __name__ == "__main__":
-    main()
+gr.Interface(fn=predict, inputs=gr.Image(type="pil"), outputs=gr.Label(num_top_classes=3)).launch(share=True)

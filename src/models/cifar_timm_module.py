@@ -7,6 +7,12 @@ from pytorch_lightning import LightningModule
 from torchmetrics import MaxMetric, MeanMetric
 from torchmetrics.classification.accuracy import Accuracy
 
+import torchvision.transforms as T
+import torch.nn.functional as F
+
+import os
+os.environ['HYDRA_FULL_ERROR'] = '1'
+
 
 class CIFARLitModule(LightningModule):
     """Example of LightningModule for CIFAR classification.
@@ -54,8 +60,37 @@ class CIFARLitModule(LightningModule):
         # for tracking best so far validation accuracy
         self.val_acc_best = MaxMetric()
 
+        # self.predict_transform = T.Normalize((0.1307,), (0.3081,))
+
+        self.predict_transform =  T.Compose([T.ToTensor(), T.Normalize((0.1307,), (0.3081,)), T.Resize(32)])
+
+        self.normalize = T.Normalize((0.1307,), (0.3081,))
+        self.resize = T.Resize([32])
+        self.to_tensor = T.ToTensor()
+
     def forward(self, x: torch.Tensor):
         return self.net(x)
+
+    @torch.jit.export
+    def forward_jit(self, x):
+
+        # transform the inputs
+        # x = self.to_tensor(x).unsqueeze(0)
+        x = self.normalize(x)
+        x = self.resize(x)
+
+
+        with torch.no_grad():
+           
+
+
+            # forward pass
+            logits = self(x)
+
+            preds = F.softmax(logits, dim=-1)
+
+        return preds
+
 
     def on_train_start(self):
         # by default lightning executes validation step sanity checks before training starts,
