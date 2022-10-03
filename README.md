@@ -1,3 +1,29 @@
+# Session 4
+
+### Docker Image url
+
+shivam13juna/tsai_emlo4
+
+
+### For running docker-image
+
+docker run -p 8080:8080 shivam13juna/tsai_emlo4
+
+
+### For building Docker-image
+
+cd dockerize/
+
+docker image build -t torch_script .
+
+
+## Link to Github REPO
+
+
+
+
+# Session 2
+
 ## Building Image
 
 make build
