@@ -2,6 +2,7 @@ import torch
 import gradio as gr
 import torchvision.transforms as T
 import torch.nn.functional as F
+from utils import S3Client
 
 # from src import utils
 
@@ -19,6 +20,16 @@ def demo():
     # log.info("Running Demo")
 
     # log.info(f"Instantiating scripted model")
+
+    print("Downloading model from S3")
+    BUCKET_NAME = "test-bucket-emlo-1"
+    KEY = "s5/model.script.pt"
+    file = "/opt/src/model.script.pt"
+    cli = S3Client(BUCKET_NAME)
+    cli.download_file_from_s3(KEY, file)
+    print("Model downloaded, and saved to /opt/src/model.script.pt")
+
+
     model = torch.jit.load('model.script.pt')
 
     # log.info(f"Loaded Model: {model}")
