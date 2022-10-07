@@ -9,6 +9,7 @@ root = pyrootutils.setup_root(
 import os
 import sys
 import torch
+
 # ------------------------------------------------------------------------------------ #
 # `pyrootutils.setup_root(...)` is recommended at the top of each start file
 # to make the environment more robust and consistent
@@ -102,7 +103,9 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
 
     log.info("Scripting Model")
 
-    scripted_model = model.to_torchscript(method='script')
+    scripted_model = model.to_torchscript(
+        method="trace", example_inputs=torch.randn(1, 3, 32, 32)
+    )
     torch.jit.save(scripted_model, f"{cfg.paths.output_dir}/model.script.pt")
 
     log.info(f"Saving model to {cfg.paths.output_dir}")

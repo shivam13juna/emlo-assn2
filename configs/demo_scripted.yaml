@@ -8,4 +8,4 @@ defaults:
 task_name: "demo_traced"
 
 # checkpoint is necessary for demo
-ckpt_path: logs/train/runs/2022-10-03_08-29-58/model.script.pt
+ckpt_path: logs/train/runs/2022-10-07_14-19-08/model.script.pt  

@@ -64,28 +64,28 @@ class CIFARLitModule(LightningModule):
 
         self.predict_transform =  T.Compose([T.ToTensor(), T.Normalize((0.1307,), (0.3081,)), T.Resize(32)])
 
-        self.normalize = T.Normalize((0.1307,), (0.3081,))
-        self.resize = T.Resize([32])
+        self.normalize = T.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        self.resize = T.Resize((32, 32))
         self.to_tensor = T.ToTensor()
 
     def forward(self, x: torch.Tensor):
         return self.net(x)
 
     @torch.jit.export
-    def forward_jit(self, x):
+    def forward_jit(self, x: torch.Tensor):
 
         # transform the inputs
+        # x = torch.from_numpy(x)
+        # x = torch.LongTensor(x).unsqueeze(1)
         # x = self.to_tensor(x).unsqueeze(0)
+        # print("shape of x1: ", x.shape)
+        x = x.permute(0,3,1,2).div(255)
+        # print("shape of x2: ", x.shape)
         x = self.normalize(x)
-        x = self.resize(x)
+        x = self.resize(x) 
 
-
-        with torch.no_grad():
-           
-
-
-            # forward pass
-            logits = self(x)
+        with torch.no_grad():  # forward pass
+            logits = self.net(x)
 
             preds = F.softmax(logits, dim=-1)
 

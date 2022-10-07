@@ -35,7 +35,7 @@ model_name: resnet18
 #     lin3_size: 64
 
 datamodule:
-  batch_size: 64
+  batch_size: 1000
 
 logger:
   wandb:

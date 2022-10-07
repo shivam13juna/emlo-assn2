@@ -11,6 +11,7 @@ from typing import List, Tuple
 
 import torch
 import hydra
+import numpy as np
 import gradio as gr
 from omegaconf import DictConfig
 import torchvision.transforms as T
@@ -41,7 +42,8 @@ def demo(cfg: DictConfig) -> Tuple[dict, dict]:
     def recognize_digit(image):
         if image is None:
             return None
-        image = T.ToTensor()(image).unsqueeze(0)
+        # image = T.ToTensor()(image).unsqueeze(0)
+        image = torch.tensor(image[None, ...], dtype=torch.float32)
         preds = model.forward_jit(image)
         preds = preds[0].tolist()
         label = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
@@ -51,7 +53,7 @@ def demo(cfg: DictConfig) -> Tuple[dict, dict]:
 
     demo = gr.Interface(
         fn=recognize_digit,
-        inputs="image",
+        inputs=gr.Image(shape=(32, 32)),
         outputs=[gr.Label(num_top_classes=10)],
         live=True,
     )
