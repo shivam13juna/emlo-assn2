@@ -36,7 +36,7 @@ import torch
 from typing import List, Optional, Tuple
 
 import hydra
-import pytorch_lightning as pl
+# import pytorch_lightning as pl
 from omegaconf import DictConfig
 from pytorch_lightning import Callback, LightningDataModule, LightningModule, Trainer
 from pytorch_lightning.loggers import LightningLoggerBase
@@ -62,8 +62,8 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
     """
 
     # set seed for random number generators in pytorch, numpy and python.random
-    if cfg.get("seed"):
-        pl.seed_everything(cfg.seed, workers=True)
+    # if cfg.get("seed"):
+    #     pl.seed_everything(cfg.seed, workers=True)
 
     log.info(f"Instantiating datamodule <{cfg.datamodule._target_}>")
     datamodule: LightningDataModule = hydra.utils.instantiate(cfg.datamodule)

@@ -5,7 +5,7 @@ defaults:
   - override /datamodule: cifar.yaml
   - override /model: cifar.yaml
   - override /callbacks: default.yaml
-  - override /trainer: gpu.yaml
+  - override /trainer: hive.yaml
   - override /logger: tensorboard.yaml
   # - override hydra/sweeper: optuna
 
@@ -35,7 +35,7 @@ model_name: resnet18
 #     lin3_size: 64
 
 datamodule:
-  batch_size: 1000
+  batch_size: 20000
 
 logger:
   wandb:

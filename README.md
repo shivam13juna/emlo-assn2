@@ -1,14 +1,28 @@
+# Session 6
+
+#### Without 2 nodes
+
+Tensorboard link to logs with multi gpu training without 2 nodes https://tensorboard.dev/experiment/Y965wCV6SX6yswvqE8cJnw/
+
+max_batch_size = 20000
+
+#### With 2 nodes
+
+Tensorboard link to logs with gpu training with 2 nodes https://tensorboard.dev/experiment/YXzLURTzSGy7EjmpfGj8nA/
+
+max_batch_size = 20000
+
+was able to pass same max batch-size
+
 # Session 4
 
 ### Docker Image url
 
 shivam13juna/tsai_emlo4
 
-
 ### For running docker-image
 
 docker run -p 8080:8080 shivam13juna/tsai_emlo4
-
 
 ### For building Docker-image
 
@@ -16,12 +30,9 @@ cd dockerize/
 
 docker image build -t torch_script .
 
-
 ## Link to Github REPO
 
 https://github.com/shivam13juna/emlo-assn2.git
-
-
 
 # Session 2
 
