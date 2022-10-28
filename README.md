@@ -4,11 +4,15 @@
 
 Tensorboard link to logs with multi gpu training without 2 nodes https://tensorboard.dev/experiment/Y965wCV6SX6yswvqE8cJnw/
 
+s3://test-bucket-emlo-1/s6/without_2_nodes_epoch_007.ckpt
+
 max_batch_size = 20000
 
 #### With 2 nodes
 
 Tensorboard link to logs with gpu training with 2 nodes https://tensorboard.dev/experiment/YXzLURTzSGy7EjmpfGj8nA/
+
+s3://test-bucket-emlo-1/s6/with_2_nodes_epoch_005.ckpt
 
 max_batch_size = 20000
 
