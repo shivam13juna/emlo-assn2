@@ -17,7 +17,7 @@ tags: ["mnist", "simple_dense_net"]
 seed: 12345
 
 trainer:
-  min_epochs: 10
+  min_epochs: 1
   max_epochs: 10
   gradient_clip_val: 0.5
 
@@ -30,7 +30,7 @@ model:
     lin3_size: 64
 
 datamodule:
-  batch_size: 64
+  batch_size: 528
 
 logger:
   wandb:

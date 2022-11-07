@@ -104,7 +104,7 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
     log.info("Scripting Model")
 
     scripted_model = model.to_torchscript(
-        method="trace", example_inputs=torch.randn(1, 3, 32, 32)
+        method="trace", example_inputs=torch.randn(1, 1, 28, 28)
     )
     torch.jit.save(scripted_model, f"{cfg.paths.output_dir}/model.script.pt")
 
