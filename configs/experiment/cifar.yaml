@@ -5,7 +5,7 @@ defaults:
   - override /datamodule: cifar.yaml
   - override /model: cifar.yaml
   - override /callbacks: default.yaml
-  - override /trainer: hive.yaml
+  - override /trainer: gpu.yaml
   - override /logger: tensorboard.yaml
   # - override hydra/sweeper: optuna
 
@@ -19,7 +19,7 @@ seed: 12345
 
 trainer:
   min_epochs: 1
-  max_epochs: 10
+  max_epochs: 1
   gradient_clip_val: 0.5
 
 

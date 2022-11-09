@@ -104,10 +104,10 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
     log.info("Scripting Model")
 
     scripted_model = model.to_torchscript(
-        method="trace", example_inputs=torch.randn(1, 1, 28, 28)
+        method="trace", example_inputs=torch.randn(1, 3, 32, 32)
     )
     torch.jit.save(scripted_model, f"{cfg.paths.output_dir}/model.script.pt")
-
+    log.info(f"File size in MB: {os.path.getsize(f'{cfg.paths.output_dir}/model.script.pt') / 1e6}")
     log.info(f"Saving model to {cfg.paths.output_dir}")
 
     if cfg.get("test"):
