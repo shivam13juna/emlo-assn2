@@ -1,23 +1,25 @@
-# --------- pytorch --------- #
-torch>=1.10.0
-torchvision>=0.11.0
-pytorch-lightning==1.7.1
-torchmetrics==0.9.3
-
-# --------- hydra --------- #
-hydra-core==1.2.0
-hydra-colorlog==1.2.0
-hydra-optuna-sweeper==1.2.0
+boto3==1.26.5
+botocore==1.29.5
+captum==0.5.0
+grad_cam==1.4.6
+gradio==3.9
+matplotlib==3.6.0
+numpy==1.23.3
+omegaconf==2.2.3
+packaging==21.3
+Pillow==9.3.0
+pyrootutils==1.0.4
+pytest==7.2.0
+pytorch_lightning==1.7.1
+requests==2.28.1
+rich==12.6.0
+setuptools==65.3.0
+sh==1.14.3
+shap==0.41.0
 timm==0.6.7
-# --------- loggers --------- #
-# wandb
-# neptune-client
-# mlflow
-# comet-ml
-
-# --------- others --------- #
-pyrootutils     # standardizing the project root setup
-pre-commit      # hooks for applying linters on commit
-rich            # beautiful text formatting in terminal
-pytest          # tests
-# sh            # for running bash commands in some tests (linux/macos only)
+torch==1.11.0+cu113
+torchmetrics==0.9.3
+torchserve==0.6.0
+torchvision==0.12.0+cu113
+ts==0.5.1
+wandb==0.13.5

@@ -35,3 +35,5 @@ class ImageClassifier(VisionHandler):
         classes = classes.tolist()
         return map_class_to_label(probs, self.mapping, classes)
 
+
+# torch-model-archiver --model-name cifar_basic --version 1.0 --serialized-file new_trace_file/model.script.pt --handler src/torch_handler/cifar_handler.py --extra-files src/torch_handler/cifar_classes/index_to_name.json

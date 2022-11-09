@@ -71,25 +71,25 @@ class CIFARLitModule(LightningModule):
     def forward(self, x: torch.Tensor):
         return self.net(x)
 
-    # @torch.jit.export
-    # def forward_jit(self, x: torch.Tensor):
+    @torch.jit.export
+    def forward_jit(self, x: torch.Tensor):
 
-    #     # transform the inputs
-    #     # x = torch.from_numpy(x)
-    #     # x = torch.LongTensor(x).unsqueeze(1)
-    #     # x = self.to_tensor(x).unsqueeze(0)
-    #     # print("shape of x1: ", x.shape)
-    #     x = x.permute(0,3,1,2).div(255)
-    #     # print("shape of x2: ", x.shape)
-    #     x = self.normalize(x)
-    #     x = self.resize(x) 
+        # transform the inputs
+        # x = torch.from_numpy(x)
+        # x = torch.LongTensor(x).unsqueeze(1)
+        # x = self.to_tensor(x).unsqueeze(0)
+        # print("shape of x1: ", x.shape)
+        x = x.permute(0,3,1,2).div(255)
+        # print("shape of x2: ", x.shape)
+        x = self.normalize(x)
+        x = self.resize(x) 
 
-    #     with torch.no_grad():  # forward pass
-    #         logits = self.net(x)
+        with torch.no_grad():  # forward pass
+            logits = self.net(x)
 
-    #         preds = F.softmax(logits, dim=-1)
+            preds = F.softmax(logits, dim=-1)
 
-    #     return preds
+        return preds
 
 
     def on_train_start(self):
