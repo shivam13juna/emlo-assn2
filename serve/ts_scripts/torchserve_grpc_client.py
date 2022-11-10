@@ -6,8 +6,8 @@ import management_pb2_grpc
 import sys
 
 
-def get_inference_stub():
-    channel = grpc.insecure_channel('localhost:7070')
+def get_inference_stub(url='4040-shivam13juna-emloassn2-1l8ndlivdzh.ws-us75.gitpod.io'):
+    channel = grpc.insecure_channel(url)
     stub = inference_pb2_grpc.InferenceAPIsServiceStub(channel)
     return stub
 
@@ -30,6 +30,7 @@ def infer(stub, model_name, model_input):
     try:
         prediction = response.prediction.decode('utf-8')
         print(prediction)
+        return prediction
     except grpc.RpcError as e:
         exit(1)
 

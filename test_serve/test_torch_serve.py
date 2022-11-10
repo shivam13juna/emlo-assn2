@@ -9,7 +9,7 @@ from requests import Response
 class TestFargateGradio(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://127.0.0.1:8080/predictions/cifar"
+        cls.base_url = "https://7dbd-34-168-0-159.ngrok.io/predictions/cifar"
 
 
         cls.image_paths = ['1000_truck.png',  '10011_cat.png',  '10010_airplane.png',  '10008_airplane.png',  '10001_frog.png',  '10003_ship.png',  '10009_frog.png',  '10006_deer.png',  '10005_cat.png',  '10007_frog.png']
