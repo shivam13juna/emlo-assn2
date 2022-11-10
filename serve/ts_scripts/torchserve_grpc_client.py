@@ -7,7 +7,7 @@ import sys
 
 
 def get_inference_stub():
-    channel = grpc.insecure_channel('localhost:8080', options=(('grpc.enable_http_proxy', 0),))
+    channel = grpc.insecure_channel('localhost:7070')
     stub = inference_pb2_grpc.InferenceAPIsServiceStub(channel)
     return stub
 
