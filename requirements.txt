@@ -16,7 +16,7 @@ rich==12.6.0
 setuptools==65.3.0
 sh==1.14.3
 shap==0.41.0
-timm==0.6.7
+timm==0.6.12
 torch==1.11.0+cu113
 torchmetrics==0.9.3
 torchserve==0.6.0
